@@ -1,25 +1,26 @@
 import { useState, useEffect } from "react";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 import { add } from "../store/cartSlice";
+import { fetchProducts } from "../store/productSclice";
 
 const Products = (props) => {
   const [products, setPrducts] = useState([]);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const res = await fetch("https://fakestoreapi.com/products");
-      const data = await res.json();
-      console.log(data);
-      setPrducts(data);
-    };
-    fetchProducts();
+    dispatch(fetchProducts());
+    // const fetchProducts = async () => {
+    //   const res = await fetch("https://fakestoreapi.com/products");
+    //   const data = await res.json();
+    //   console.log(data);
+    //   setPrducts(data);
+    // };
+    // fetchProducts();
   }, []);
   console.log("props: ", props);
 
   const handleAdd = (product) => {
-    dispatch(add(product))
-
+    dispatch(add(product));
   };
 
   return (
@@ -29,7 +30,7 @@ const Products = (props) => {
           <img src={product.image} alt={product.title} />
           <h4>{product.title}</h4>
           <h5>{product.price}</h5>
-          <button onClick={()=>handleAdd(product)}>Add to cart</button>
+          <button onClick={() => handleAdd(product)}>Add to cart</button>
         </div>
       ))}
     </div>
