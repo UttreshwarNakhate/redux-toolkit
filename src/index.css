@@ -61,3 +61,30 @@ img {
   padding: 14px;
   border-radius: 5px;
 }
+
+.loaderWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
+.productsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  width: 200px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.error{
+  margin: auto;
+  text-decoration: red;
+  font-weight: bold;
+}

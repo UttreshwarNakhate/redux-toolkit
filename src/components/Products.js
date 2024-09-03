@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { add } from "../store/cartSlice";
 import { fetchProducts } from "../store/productSclice";
+import { STATUSES } from "../store/productSclice";
+import { RingLoader } from "react-spinners";
 
 const Products = (props) => {
-  const [products, setPrducts] = useState([]);
+  // const [products, setPrducts] = useState([]);
   const dispatch = useDispatch();
+  const { data: products, status } = useSelector((state) => state.product);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -22,6 +25,16 @@ const Products = (props) => {
   const handleAdd = (product) => {
     dispatch(add(product));
   };
+
+  if (status === STATUSES.LOADING) {
+    return <div className="loaderWrapper">
+      <RingLoader  color="#3f4141"
+    size={150}/>
+    </div>;
+  }
+  if (status === STATUSES.ERROR) {
+    return <h1 className="error">Something went wrong!</h1>;
+  }
 
   return (
     <div className="productsWrapper">
